@@ -1,17 +1,58 @@
 import React from 'react'
+import { Svgs } from '../assets/svgs'
 
 function Card(props) {
     const { team } = props
+    const colorMapper = {
+        bg: {
+            red: "bg-danger",
+            blue: "bg-primary",
+            green: "bg-success",
+            yellow: "bg-warning"
+        },
+        border: {
+            red: "border-danger-subtle",
+            blue: "border-primary-subtle",
+            green: "border-success-subtle",
+            yellow: "border-warning-subtle"
+        }
+    }
+
+    const uiMapper = [
+        {
+            RankIcon: <Svgs.medal3 width={40} height={80} />,
+            RanksNo: team.ranks.general
+        },
+        {
+            RankIcon: <Svgs.medal2 width={40} height={80} />,
+            RanksNo: team.ranks.commander
+        },
+        {
+            RankIcon: <Svgs.medal1 width={40} height={80} />,
+            RanksNo: team.ranks.soldier
+        },
+    ]
+
     return (
-        <div className={`card p-3 d-flex justify-content-center align-items-center ${team.color}`}>
-            <div className='d-flex flex-column'>
-                <h2>{team.name}</h2>
-                <h2>Ranks:</h2>
-                <ul>
-                    <li>Generals: {team.ranks.general}</li>
-                    <li>Commanders: {team.ranks.commander}</li>
-                    <li>Soldier: {team.ranks.soldier}</li>
-                </ul>
+        <div className={`rounded rounded-5 p-4 d-flex justify-content-center align-items-center m-3 w-100 ${colorMapper.bg[team.color]}`}>
+            <div className='d-flex flex-column justify-content-center w-100'>
+                <div className={`border-bottom rounded rounded-4 border-3 ${colorMapper.border[team.color]} bg-white  d-flex justify-content-center mb-1`}>
+                    <h2 className='fs-3'>{team.name}</h2>
+                </div>
+                <div className='d-flex flex-row px-1'>
+                    {uiMapper.map((ui, key) => (
+                        <div key={key} className='col-4 px-1'>
+                            <div className={`bg-white m-1 border-bottom rounded rounded-4 border-3 ${colorMapper.border[team.color]} py-2 px-4 d-flex justify-content-center align-items-center`}>
+                                <div>
+                                    {ui.RankIcon}
+                                </div>
+                                <div className='ps-3'>
+                                    <h2 className='fs-1 text-dark'>{ui.RanksNo}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
