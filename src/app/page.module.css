@@ -1,11 +1,20 @@
-.outline {
-  position: relative;
-  z-index: 1;
+.container {
+    position: relative;
+    width: 75%;
 }
+
+.outline {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
 .country {
-  position: absolute;
-  z-index: 2;
-  top: 535px;
-  left: 588px;
-  width: 50px;
+    position: absolute;
+        width: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }

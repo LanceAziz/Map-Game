@@ -13,7 +13,7 @@ export default function Home() {
         })}
       </div>
       <div className="col-lg-8 col-md-6 d-flex justify-content-center align-items-center">
-        <div className="position-absolute w-50">
+        <div className={styles.container}>
           <div className={styles.outline}>
             <Svgs.outline />
           </div>
