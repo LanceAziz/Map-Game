@@ -1,1 +1,7 @@
-<svg id="Colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.79 140.5"><defs><style>.cls-1{fill:#ff00c9;}</style></defs><g id="North_America" data-name="North America"><path id="_4" data-name="4" class="cls-1" d="M475.93,303.82c22.7,0,46.36-9,89.41,26C572.9,335,577.63,335,577.63,335s2.84-50.62,1.9-55.82l-3.31.47-2.37-30.28c-33.59,2.37-47.31-19.87-45.41-51.09-5.68-.94-13.72-3.31-13.72-3.31l-31.7-.47,1,37.37-6.63,4.26Z" transform="translate(-475.93 -194.54)"/></g></svg>
+<svg id="Colors" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 103.79 140.5">
+    <g id="North_America" data-name="North America">
+        <path id="_4" data-name="4" class="cls-1"
+            d="M475.93,303.82c22.7,0,46.36-9,89.41,26C572.9,335,577.63,335,577.63,335s2.84-50.62,1.9-55.82l-3.31.47-2.37-30.28c-33.59,2.37-47.31-19.87-45.41-51.09-5.68-.94-13.72-3.31-13.72-3.31l-31.7-.47,1,37.37-6.63,4.26Z"
+            transform="translate(-475.93 -194.54)" />
+    </g>
+</svg>

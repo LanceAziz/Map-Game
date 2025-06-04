@@ -1,5 +1,5 @@
 import React from 'react'
-import { Svgs } from '../assets/svgs'
+import { Medal1, Medal2, Medal3 } from '../../assets/svgs'
 
 function Card(props) {
     const { team } = props
@@ -20,16 +20,16 @@ function Card(props) {
 
     const uiMapper = [
         {
-            RankIcon: <Svgs.medal3 width={40} height={80} />,
-            RanksNo: team.ranks.general
+            RankIcon: <Medal1 width={40} height={80} />,
+            RanksNo: team.ranks.gold
         },
         {
-            RankIcon: <Svgs.medal2 width={40} height={80} />,
-            RanksNo: team.ranks.commander
+            RankIcon: <Medal2 width={40} height={80} />,
+            RanksNo: team.ranks.silver
         },
         {
-            RankIcon: <Svgs.medal1 width={40} height={80} />,
-            RanksNo: team.ranks.soldier
+            RankIcon: <Medal3 width={40} height={80} />,
+            RanksNo: team.ranks.bronze
         },
     ]
 
