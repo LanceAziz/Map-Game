@@ -26,8 +26,8 @@ export const styles = {
     },
 
 
-    country: (left, top, size, coutryColor = "#3d3d3d") => ({
-        color: coutryColor,
+    country: (left, top, size, coutryColor) => ({
+        color: (!coutryColor || coutryColor == "") ? "#3d3d3d" : coutryColor,
         fontSize: size,
         position: "absolute",
         left: left,

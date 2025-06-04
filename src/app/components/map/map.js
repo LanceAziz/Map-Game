@@ -13,7 +13,7 @@ function Map() {
                 {countries.map((country, index) => {
                     const CountryComponent = country.icon
                     return (
-                        <CountryComponent key={index} style={styles.country(country.position.left, country.position.top, country.size)} />
+                        <CountryComponent key={index} style={styles.country(country.position.left, country.position.top, country.size, country.color)} />
                     )
                 })}
             </div>

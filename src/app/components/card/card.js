@@ -20,7 +20,7 @@ function Card(props) {
 
     const uiMapper = [
         {
-            RankIcon: <Medal1 width={40} height={80} />,
+            RankIcon: <Medal3 width={40} height={80} />,
             RanksNo: team.ranks.gold
         },
         {
@@ -28,7 +28,7 @@ function Card(props) {
             RanksNo: team.ranks.silver
         },
         {
-            RankIcon: <Medal3 width={40} height={80} />,
+            RankIcon: <Medal1 width={40} height={80} />,
             RanksNo: team.ranks.bronze
         },
     ]
