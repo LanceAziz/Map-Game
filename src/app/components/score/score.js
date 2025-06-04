@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { teams } from "../../data/data";
 import Card from "../card/card";

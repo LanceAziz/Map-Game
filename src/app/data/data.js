@@ -50,31 +50,28 @@ export const teams = [
         "shouhada 1",
         "red",
         {
-            gold: 3,
-            silver: 10,
-            bronze: 40
+            "gold": 4,
+            "silver": 6,
+            "bronze": 10
         },
-        [
-            "cairo",
-            "alex"
-        ]),
+        []),
 
     new Team(1, "shouhada 2", "blue", {
-        gold: 5,
-        silver: 30,
-        bronze: 7000
+        "gold": 5,
+        "silver": 30,
+        "bronze": 7000
     }, ["fayoum"]),
 
     new Team(2, "shouhada 3", "yellow", {
-        gold: 5,
-        silver: 30,
-        bronze: 70
+        "gold": 5,
+        "silver": 30,
+        "bronze": 70
     }, ["fayoum"]),
 
     new Team(3, "shouhada 4", "green", {
-        gold: 5,
-        silver: 30,
-        bronze: 70
+        "gold": 5,
+        "silver": 30,
+        "bronze": 70
     }, ["fayoum"]),
 ];
 
@@ -84,7 +81,7 @@ export const countries = [
     new Country("Asia3", Asia3, { top: 327, left: 837 }, 157),
     new Country("Asia4", Asia4, { top: 290, left: 890 }, 115),
     new Country("Asia5", Asia5, { top: 184, left: 935 }, 164),
-    new Country("Asia6", Asia6, { top: 171, left: 899}, 93),
+    new Country("Asia6", Asia6, { top: 171, left: 899 }, 93),
     new Country("Asia7", Asia7, { top: 237, left: 883 }, 103),
     new Country("Asia8", Asia8, { top: 157, left: 767 }, 197),
     new Country("Asia9", Asia9, { top: 187, left: 745 }, 170),
