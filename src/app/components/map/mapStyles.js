@@ -7,14 +7,14 @@ export const styles = {
         position: "absolute",
         width: "100%",
         height: "100%",
-        zIndex: 2,
+        zIndex: 1,
     },
 
     outlineContainer: {
         position: "absolute",
         width: "100%",
         height: "100%",
-        zIndex: 3,
+        zIndex: 2,
     },
 
     outline: {
@@ -22,7 +22,6 @@ export const styles = {
         top: 0,
         left: 200,
         fontSize: 900,
-        zIndex: 3,
     },
 
 
@@ -34,7 +33,10 @@ export const styles = {
         top: top,
     }),
 
-    color: {
-        fill: "azure",
-    },
+    label: (left, top) => ({
+        position: "absolute",
+        left: left,
+        top: top,
+        zIndex:5
+    })
 };

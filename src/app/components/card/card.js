@@ -63,9 +63,9 @@ function Card(props) {
                         </div>
                     ))}
                 </div>
-                <div className='d-flex justify-content-center align-items-center'>
+                {/* <div className='d-flex justify-content-center align-items-center'>
                     <button className={`btn btn-light rounded rounded-4 px-5 border-bottom border-3 ${colorMapper.border[team.color]}`} onClick={handleAdd}>add</button>
-                </div>
+                </div> */}
             </div>
         </div>
     )
