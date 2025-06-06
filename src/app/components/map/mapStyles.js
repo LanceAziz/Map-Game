@@ -32,11 +32,4 @@ export const styles = {
         left: left,
         top: top,
     }),
-
-    label: (left, top) => ({
-        position: "absolute",
-        left: left,
-        top: top,
-        zIndex:5
-    })
 };
