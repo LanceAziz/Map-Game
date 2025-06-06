@@ -1,21 +1,12 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react';
 import { Outline } from "../../assets/svgs";
-import { countries } from "../../data/data";
 import { styles } from './mapStyles';
 import Label from '../label/label';
+import { useCountryContext } from '@/app/context/countryContext';
 
 function Map() {
-    const [countryColors, setCountryColors] = useState({});
-
-    // Step 2: Handle click
-    const handleCountryClick = (id, color) => {
-        console.log(id);
-        setCountryColors((prev) => ({
-            ...prev,
-            [id]: color,
-        }));
-    };
+    const { countries } = useCountryContext();
 
     return (
         <div className="col-lg-8 col-md-6 d-flex justify-content-center align-items-center" style={styles.container}>
@@ -24,18 +15,27 @@ function Map() {
             </div>
             <div style={styles.countryContainer}>
                 {countries.map((country, index) => {
-                    const currentColor = countryColors[country.id] || country.color;
-                    const CountryComponent = country.icon
+                    const CountryComponent = country.icon;
                     return (
                         <div key={index}>
-                            <CountryComponent onClick={() => handleCountryClick(country.id, "red")} style={styles.country(country.position.left, country.position.top, country.size, currentColor)} />
-                            <Label country={country}/>
+                            <CountryComponent
+                                onClick={() => handleCountryClick(country.id, "red")} // or toggle dynamically
+                                style={styles.country(
+                                    country.position.left,
+                                    country.position.top,
+                                    country.size,
+                                    country.color
+                                )}
+                            />
+                            <div style={styles.labelContainer}>
+                                <Label country={country} />
+                            </div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         </div>
-    )
+    );
 }
 
-export default Map
+export default Map;

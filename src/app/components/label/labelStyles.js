@@ -4,7 +4,7 @@ export const styles = {
         left: left,
         top: top,
         zIndex: 5,
-        width:70
+        width: 70
     }),
     coinOutter: (color) => ({
         width: 18,
@@ -36,6 +36,7 @@ export const styles = {
         padding: "2px 4px",
         margin: "2px 0",
         borderRadius: 3,
-        borderBottom: "1px solid rgba(0, 0, 0, 0.3"
+        borderBottom: "1px solid rgba(0, 0, 0, 0.3)",
+        cursor: "pointer"
     }
 };

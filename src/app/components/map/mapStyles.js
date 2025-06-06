@@ -16,6 +16,10 @@ export const styles = {
         height: "100%",
         zIndex: 2,
     },
+    labelContainer: {
+        position: "absolute",
+        zIndex: 3,
+    },
 
     outline: {
         position: "absolute",

@@ -56,23 +56,38 @@ export const teams = [
         },
         []),
 
-    new Team(1, "shouhada 2", "blue", {
-        "gold": 5,
-        "silver": 30,
-        "bronze": 7000
-    }, ["fayoum"]),
+    new Team(
+        1,
+        "shouhada 2",
+        "blue",
+        {
+            "gold": 500,
+            "silver": 90,
+            "bronze": 7000
+        },
+        []),
 
-    new Team(2, "shouhada 3", "yellow", {
-        "gold": 5,
-        "silver": 30,
-        "bronze": 70
-    }, ["fayoum"]),
+    new Team(
+        2,
+        "shouhada 3",
+        "yellow",
+        {
+            "gold": 5,
+            "silver": 30,
+            "bronze": 70
+        },
+        []),
 
-    new Team(3, "shouhada 4", "green", {
-        "gold": 5,
-        "silver": 30,
-        "bronze": 70
-    }, ["fayoum"]),
+    new Team(
+        3,
+        "shouhada 4",
+        "green",
+        {
+            "gold": 5,
+            "silver": 30,
+            "bronze": 70
+        },
+        []),
 ];
 
 export const countries = [
@@ -125,6 +140,6 @@ export const countries = [
     // SouthAmerica
     new Country("SouthAmerica1", SouthAmerica1, { top: 590, left: 345 }, 160, { top: 650, left: 370 }),
     new Country("SouthAmerica2", SouthAmerica2, { top: 505, left: 340 }, 118, { top: 560, left: 315 }),
-    new Country("SouthAmerica3", SouthAmerica3, { top: 494, left: 373 }, 155, { top:530, left: 440 }),
+    new Country("SouthAmerica3", SouthAmerica3, { top: 494, left: 373 }, 155, { top: 530, left: 440 }),
     new Country("SouthAmerica4", SouthAmerica4, { top: 440, left: 354 }, 110, { top: 450, left: 380 }),
 ];
