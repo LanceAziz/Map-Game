@@ -15,8 +15,15 @@ export const CountryContextProvider = ({ children }) => {
         );
     };
 
+    const updateCountry = (updatedCountry) => {
+        setCountries(prev =>
+            prev.map(country => country.id === updatedCountry.id ? updatedCountry : country)
+        );
+    };
+
+
     return (
-        <CountryContext.Provider value={{ countries, setCountries, updateCountryColor }}>
+        <CountryContext.Provider value={{ countries, setCountries, updateCountry, updateCountryColor }}>
             {children}
         </CountryContext.Provider>
     );

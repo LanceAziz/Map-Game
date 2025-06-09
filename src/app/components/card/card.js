@@ -1,7 +1,7 @@
 import React from 'react';
 import { Medal1, Medal2, Medal3 } from '../../assets/svgs';
-import { countries } from '@/app/data/data';
 import { useTeamsContext } from '@/app/context/teamContext';
+import { colorMapper } from '@/app/utils/colors';
 
 function Card({ team }) {
     const { updateTeam } = useTeamsContext();
@@ -19,21 +19,6 @@ function Card({ team }) {
         };
 
         updateTeam(updatedTeam);
-    };
-
-    const colorMapper = {
-        bg: {
-            red: "bg-danger",
-            blue: "bg-primary",
-            green: "bg-success",
-            yellow: "bg-warning"
-        },
-        border: {
-            red: "border-danger-subtle",
-            blue: "border-primary-subtle",
-            green: "border-success-subtle",
-            yellow: "border-warning-subtle"
-        },
     };
 
     const uiMapper = [
@@ -57,9 +42,6 @@ function Card({ team }) {
                             </div>
                         </div>
                     ))}
-                </div>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <button className={`btn btn-light rounded rounded-4 px-5 border-bottom border-3 ${colorMapper.border[team.color]}`} onClick={handleAdd}>Add</button>
                 </div>
             </div>
         </div>

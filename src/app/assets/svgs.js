@@ -1,7 +1,6 @@
 export { default as Medal1 } from "../assets/ranks/medal1.svg"
 export { default as Medal2 } from "../assets/ranks/medal2.svg"
 export { default as Medal3 } from "../assets/ranks/medal3.svg"
-export { default as Outline } from "../assets/map/outline.svg"
 export { default as Asia1 } from "../assets/map/asia1.svg"
 export { default as Asia2 } from "../assets/map/asia2.svg"
 export { default as Asia3 } from "../assets/map/asia3.svg"

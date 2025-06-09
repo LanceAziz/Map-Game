@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+"use client"
+import React, { useRef, useState } from 'react';
 import { styles } from './labelStyles';
 import { useCountryContext } from '@/app/context/countryContext';
+import { useTeamsContext } from '@/app/context/teamContext';
+import { colorMapper } from '@/app/utils/colors';
 
 function Label(props) {
     const label = props.country.id;
@@ -8,7 +11,9 @@ function Label(props) {
     const position = props.country.labelPosition;
     const color = props.country.color;
 
-    const { updateCountryColor } = useCountryContext();
+    const { updateCountryColor, updateCountry } = useCountryContext();
+    const { teams, updateTeam } = useTeamsContext()
+    const [isOptionsShown, setIsOptionShown] = useState(false)
 
     // Store the previous color without causing re-renders
     const prevColorRef = useRef(color);
@@ -54,27 +59,65 @@ function Label(props) {
         updateCountryColor(label, prevColorRef.current);
     };
 
-    return (
-        <div
-            className="position-absolute bg-light p-1 d-flex flex-column align-items-center rounded rounded-3 border-bottom border-3"
-            style={styles.label(position.left, position.top)}
-        >
-            <h2
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                style={styles.labelName}
-            >
-                {label}
-            </h2>
+    const toggleOptionsShowing = () => {
+        if (isOptionsShown) setIsOptionShown(false)
+        else setIsOptionShown(true)
+    }
 
-            {false && (
-                <div className="d-flex">
-                    {coinUiComponent(price.gold, "gold")}
-                    {coinUiComponent(price.silver, "silver")}
-                    {coinUiComponent(price.bronze, "bronze")}
+    const handleAssign = (team) => {
+        team.addCountry(props.country)
+        updateTeam(team)
+        updateCountry(props.country)
+        setIsOptionShown(false)
+    }
+
+    const handleUnassign = () => {
+        // Loop over all teams and remove the country if it exists in their countries list
+        teams.forEach(team => {
+            // Assuming team.removeCountry exists and removes the country from team.countries
+            team.removeCountry(props.country);
+            // After removal, update the team in your context or state
+            updateTeam(team);
+        });
+
+        // Update the country to remove its assigned team & color
+        updateCountry({
+            ...props.country,
+            assignedTeam: null,
+            color: null,
+        });
+
+        setIsOptionShown(false);
+    };
+
+
+    return (
+        <div style={styles.container}>
+            {isOptionsShown &&
+                <div className="bg-light p-1 d-flex flex-column align-items-center rounded rounded-3 border-bottom border-3" style={styles.options(position.left, position.top)}>
+                    <h2 onClick={handleUnassign} style={styles.labelName}>Un-Assign</h2>
+                    {teams.map((team) => {
+                        return <h2 key={team.id} onClick={() => handleAssign(team)} className={`${colorMapper.bg[team.color]} ${colorMapper.border[team.color]}`} style={styles.labelName}>{team.name}</h2>
+                    })}
+                </div>}
+
+            {props.labelBox &&
+                <div className="bg-light p-1 d-flex flex-column align-items-center rounded rounded-3 border-bottom border-3" style={styles.label(position.left, position.top)}>
+                    <h2 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={toggleOptionsShowing} onAbort={toggleOptionsShowing} style={styles.labelName}>
+                        {label}
+                    </h2>
+
+                    {props.labelPrice && (
+                        <div className="d-flex">
+                            {coinUiComponent(price.gold, "gold")}
+                            {coinUiComponent(price.silver, "silver")}
+                            {coinUiComponent(price.bronze, "bronze")}
+                        </div>
+                    )}
                 </div>
-            )}
+            }
         </div>
+
     );
 }
 

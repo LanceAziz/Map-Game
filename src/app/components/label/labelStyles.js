@@ -1,9 +1,20 @@
 export const styles = {
+    container: {
+        position: "relative",
+        zIndex: 10
+    },
     label: (left, top) => ({
         position: "absolute",
         left: left,
         top: top,
-        zIndex: 5,
+        zIndex: 10,
+        width: 70
+    }),
+    options: (left, top) => ({
+        position: "absolute",
+        left: left,
+        top: top - 94,
+        zIndex: 999,
         width: 70
     }),
     coinOutter: (color) => ({
@@ -37,6 +48,7 @@ export const styles = {
         margin: "2px 0",
         borderRadius: 3,
         borderBottom: "1px solid rgba(0, 0, 0, 0.3)",
-        cursor: "pointer"
+        cursor: "pointer",
+        userSelect: "none"
     }
 };

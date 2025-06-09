@@ -30,10 +30,12 @@ export const styles = {
 
 
     country: (left, top, size, coutryColor) => ({
-        color: (!coutryColor || coutryColor == "") ? "#3d3d3d" : coutryColor,
+        fill: (!coutryColor || coutryColor == "") ? "#3d3d3d" : coutryColor,
         fontSize: size,
         position: "absolute",
         left: left,
         top: top,
+        stroke: "#000000",
+        strokeWidth: 3,
     }),
 };

@@ -1,3 +1,6 @@
+import { colorMapper } from "../utils/colors";
+import { teams } from "../data/data";
+
 export class Team {
     constructor(id, name, color, score = {}, countries = []) {
         this.id = id;
@@ -42,20 +45,38 @@ export class Team {
 
     addCountry(country) {
         const alreadyExists = this.countries.some(cntry => cntry.id === country.id);
+
+        // If not already assigned to this team and it's a valid purchase
         if (!alreadyExists && this.isPurchaseValid(country)) {
+            // Check if the country is already assigned to another team
+            if (country.assignedTeam && country.assignedTeam !== this.name) {
+                // Find the old team and remove the country from its list
+                const oldTeam = teams.find(team => team.name === country.assignedTeam);
+                if (oldTeam) {
+                    oldTeam.countries = oldTeam.countries.filter(cntry => cntry.id !== country.id);
+                }
+            }
+
+            // Perform assignment to the new team
             this.calculate(country, "-");
             this.countries.push(country);
+            country.color = colorMapper.color[this.color];
+            country.assignedTeam = this.name;
         } else if (alreadyExists) {
             console.log("Country already Exists.");
         }
-        return this.score
+
+        return this.score;
     }
+
 
     removeCountry(country) {
         const exists = this.countries.some(cntry => cntry.id === country.id);
         if (exists) {
             this.calculate(country, "+");
             this.countries = this.countries.filter(cntry => cntry.id !== country.id);
+            country.color = null
+            country.assignedTeam = null
         } else {
             console.log("Country not found in ypur Assets");
         }
