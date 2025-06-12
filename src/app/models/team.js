@@ -60,6 +60,7 @@ export class Team {
             // Perform assignment to the new team
             this.calculate(country, "-");
             this.countries.push(country);
+            console.log("Current Countries: ",JSON.stringify(this.countries));
             country.color = colorMapper.color[this.color];
             country.assignedTeam = this.name;
         } else if (alreadyExists) {
