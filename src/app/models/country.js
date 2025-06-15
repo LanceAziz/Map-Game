@@ -5,8 +5,8 @@ export class Country {
         this.position = position
         this.size = size;
         this.labelPosition = labelPosition;
-        this.price = price ? price : { "gold": 2, "silver": 20, "bronze": 300 };
         this.color = color ? color : "#3d3d3d";
+        this.price = price ? price : { "gold": 2, "silver": 20, "bronze": 300 }
         this.assignedTeam = assignedTeam ? assignedTeam : "";
     }
 }

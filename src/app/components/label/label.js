@@ -96,7 +96,7 @@ function Label(props) {
         <div style={styles.container}>
             {isOptionsShown &&
                 <div className="bg-light p-1 d-flex flex-column align-items-center rounded rounded-3 border-bottom border-3" style={styles.options(position.left, position.top)}>
-                    <h2 onClick={postTeam} style={styles.labelName}>Un-Assign</h2>
+                    <h2 onClick={handleUnassign} style={styles.labelName}>Un-Assign</h2>
                     {teams.map((team) => {
                         return <h2 key={team.id} onClick={() => handleAssign(team)} className={`${colorMapper.bg[team.color]} ${colorMapper.border[team.color]}`} style={styles.labelName}>{team.name}</h2>
                     })}
