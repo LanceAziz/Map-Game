@@ -1,11 +1,10 @@
 "use client"
 import React, { createContext, useContext, useState } from 'react';
-import { teams as initialTeams } from '../data/data';
 
 const TeamsContext = createContext();
 
 export const TeamsContextProvider = ({ children }) => {
-    const [teams, setTeams] = useState(initialTeams);
+    const [teams, setTeams] = useState([]);
 
     const updateTeam = (updatedTeam) => {
         setTeams(prev =>

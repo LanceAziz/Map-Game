@@ -4,7 +4,7 @@ import { styles } from './labelStyles';
 import { useCountryContext } from '@/app/context/countryContext';
 import { useTeamsContext } from '@/app/context/teamContext';
 import { colorMapper } from '@/app/utils/colors';
-import { postTeam } from '@/app/api/apis';
+import { getData, postData } from '@/app/api/apis';
 
 function Label(props) {
     const label = props.country.id;
@@ -52,7 +52,7 @@ function Label(props) {
     const handleMouseEnter = () => {
         // Store the current color before changing it
         prevColorRef.current = props.country.color;
-        updateCountryColor(label, "#ffffff");
+        updateCountryColor(label, "white");
     };
 
     const handleMouseLeave = () => {
@@ -67,21 +67,23 @@ function Label(props) {
 
     const handleAssign = (team) => {
         team.addCountry(props.country)
-        updateTeam(team)
-        updateCountry(props.country)
-        setIsOptionShown(false)
+        const data = postData(team, props.country)
+        if (data) {
+            updateTeam(team)
+            updateCountry(props.country)
+            setIsOptionShown(false)
+        } else {
+            console.log("Error assigning country to team");
+        }
+
     }
 
     const handleUnassign = () => {
-        // Loop over all teams and remove the country if it exists in their countries list
         teams.forEach(team => {
-            // Assuming team.removeCountry exists and removes the country from team.countries
             team.removeCountry(props.country);
-            // After removal, update the team in your context or state
             updateTeam(team);
         });
 
-        // Update the country to remove its assigned team & color
         updateCountry({
             ...props.country,
             assignedTeam: null,

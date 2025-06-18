@@ -42,53 +42,17 @@ import {
     SouthAmerica3,
     SouthAmerica4,
 } from "../assets/svgs";
+import { getData } from "../api/apis";
 
+let response = getData()
 
-export const teams = [
-    new Team(
-        0,
-        "shouhada 1",
-        "red",
-        {
-            "gold": 40,
-            "silver": 600,
-            "bronze": 1000
-        },
-        []),
+export let teams = [];
+response.then(response => {
+    teams = response.teams.map(
+        t => new Team(t.id, t.name, t.color, t.score, t.countries)
+    );
+});
 
-    new Team(
-        1,
-        "shouhada 2",
-        "blue",
-        {
-            "gold": 500,
-            "silver": 90,
-            "bronze": 7000
-        },
-        []),
-
-    new Team(
-        2,
-        "shouhada 3",
-        "yellow",
-        {
-            "gold": 5,
-            "silver": 30,
-            "bronze": 70
-        },
-        []),
-
-    new Team(
-        3,
-        "shouhada 4",
-        "green",
-        {
-            "gold": 5,
-            "silver": 30,
-            "bronze": 70
-        },
-        []),
-];
 
 export const countries = [
     // Asia
@@ -143,3 +107,17 @@ export const countries = [
     new Country("Brazil", SouthAmerica3, { top: 494, left: 373 }, 155, { top: 530, left: 440 }),
     new Country("Venezuela", SouthAmerica4, { top: 440, left: 354 }, 110, { top: 450, left: 380 }),
 ];
+
+export const mergeCountryBackendData = async () => {
+    const response = await getData();
+    if (!response || !response.countries) return;
+
+    response.countries.forEach(apiCountry => {
+        const localCountry = countries.find(c => c.id === apiCountry.id);
+        if (localCountry) {
+            if (apiCountry.color !== undefined) localCountry.color = apiCountry.color;
+            if (apiCountry.price !== undefined) localCountry.price = apiCountry.price;
+            if (apiCountry.assignedTeam !== undefined) localCountry.assignedTeam = apiCountry.assignedTeam;
+        }
+    });
+};

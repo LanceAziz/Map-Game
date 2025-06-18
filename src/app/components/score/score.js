@@ -6,6 +6,7 @@ import { useTeamsContext } from '@/app/context/teamContext';
 function Score() {
     const { teams } = useTeamsContext();
 
+
     return (
         <div className="col-lg-4 col-md-6 p-1">
             {teams.map((team) => (

@@ -1,11 +1,10 @@
 "use client";
 import React, { createContext, useContext, useState } from 'react';
-import { countries as initialCountries } from '../data/data';
 
 const CountryContext = createContext();
 
 export const CountryContextProvider = ({ children }) => {
-    const [countries, setCountries] = useState(initialCountries);
+    const [countries, setCountries] = useState([]);
 
     const updateCountryColor = (countryId, newColor) => {
         setCountries(prev =>

@@ -1,3 +1,4 @@
+import { colorMapper } from "@/app/utils/colors";
 export const styles = {
     container: {
         position: "relative",
@@ -29,8 +30,8 @@ export const styles = {
     },
 
 
-    country: (left, top, size, coutryColor) => ({
-        fill: (!coutryColor || coutryColor == "") ? "#3d3d3d" : coutryColor,
+    country: (left, top, size, countryColor) => ({
+        fill: (countryColor && countryColor !== "") ? colorMapper.color[countryColor] : "#3d3d3d",
         fontSize: size,
         position: "absolute",
         left: left,

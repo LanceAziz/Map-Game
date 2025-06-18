@@ -15,6 +15,7 @@ export const colorMapper = {
         red: "#DB4437",
         blue: "#4285F4",
         green: "#0F9D58",
-        yellow: "#F4B400"
+        yellow: "#F4B400",
+        white: "#FFFFFF"
     }
 };
