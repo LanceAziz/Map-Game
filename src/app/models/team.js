@@ -1,4 +1,3 @@
-import { colorMapper } from "../utils/colors";
 import { teams } from "../data/data";
 
 export class Team {
@@ -60,9 +59,9 @@ export class Team {
             // Perform assignment to the new team
             this.calculate(country, "-");
             this.countries.push(country);
-            console.log("Current Countries: ",JSON.stringify(this.countries));
+            console.log("Current Countries: ", JSON.stringify(this.countries));
             country.color = this.color;
-            console.log("Country Color: ", country.color);  
+            console.log("Country Color: ", country.color);
             country.assignedTeam = this.name;
         } else if (alreadyExists) {
             console.log("Country already Exists.");

@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast'
+
 const url = "https://script.google.com/macros/s/AKfycbzOJZg8cCLE2Wofij7IDRiDFY_aW8UKnub858GMpPVlFEnHvRPTOCgq2_ogZo6h7DQa/exec";
 
 export const getData = async () => {
@@ -10,9 +12,11 @@ export const getData = async () => {
 
     const data = await response.json();
     console.log("Success:", data);
+    toast.success("Data fetched successfully!")
     return data;
   } catch (error) {
     console.error("Error:", error);
+    toast.error("Failed to fetch data!")
     return null;
   }
 };
@@ -42,8 +46,10 @@ export const postData = async (team, country) => {
 
     const data = await response.json();
     console.log("Success:", data);
+    toast.success("Data posted successfully!")
     return data;
   } catch (error) {
     console.error("Error:", error);
+    toast.error("Failed to post data!")
   }
 };

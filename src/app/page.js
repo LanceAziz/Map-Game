@@ -4,7 +4,6 @@ import DataInitializer from "../../dataInitializer";
 import App from "./app";
 
 export default function Home() {
-
   return (
     <TeamsContextProvider>
       <CountryContextProvider>
