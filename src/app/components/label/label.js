@@ -5,37 +5,30 @@ import { useCountryContext } from '@/app/context/countryContext';
 import { useTeamsContext } from '@/app/context/teamContext';
 import { colorMapper } from '@/app/utils/colors';
 import { getData, postData } from '@/app/api/apis';
+import toast from 'react-hot-toast';
 
 function Label(props) {
     const label = props.country.id;
     const price = props.country.price;
     const position = props.country.labelPosition;
     const color = props.country.color;
+    const setCurrentCountryOption = props.setCurrentCountryOption;
+    const setShowAllCountries = props.setShowAllCountries;
 
     const { updateCountryColor, updateCountry } = useCountryContext();
     const { teams, updateTeam } = useTeamsContext()
     const [isOptionsShown, setIsOptionShown] = useState(false)
 
-    // Store the previous color without causing re-renders
     const prevColorRef = useRef(color);
-
-    const colors = {
-        innerGold: "#ffc107",
-        innerSilver: "#949494",
-        innerBronze: "#8d3f00",
-        outterGold: "#dfa805",
-        outterSilver: "#757575",
-        outterBronze: "#5e2b01",
-    };
 
     const colorPicker = (type) => {
         switch (type) {
             case "gold":
-                return { outter: colors.outterGold, inner: colors.innerGold };
+                return { outter: colorMapper.coin.outterGold, inner: colorMapper.coin.innerGold };
             case "silver":
-                return { outter: colors.outterSilver, inner: colors.innerSilver };
+                return { outter: colorMapper.coin.outterSilver, inner: colorMapper.coin.innerSilver };
             case "bronze":
-                return { outter: colors.outterBronze, inner: colors.innerBronze };
+                return { outter: colorMapper.coin.outterBronze, inner: colorMapper.coin.innerBronze };
             default:
                 return { outter: "#000", inner: "#000" };
         }
@@ -50,47 +43,80 @@ function Label(props) {
     );
 
     const handleMouseEnter = () => {
-        // Store the current color before changing it
         prevColorRef.current = props.country.color;
         updateCountryColor(label, "white");
     };
 
     const handleMouseLeave = () => {
-        // Revert to previous color
         updateCountryColor(label, prevColorRef.current);
     };
 
     const toggleOptionsShowing = () => {
-        if (isOptionsShown) setIsOptionShown(false)
-        else setIsOptionShown(true)
+        if (isOptionsShown) {
+            setIsOptionShown(false)
+            setCurrentCountryOption(null);
+            setShowAllCountries(true)
+        }
+        else {
+            setIsOptionShown(true)
+            setCurrentCountryOption(label);
+            setShowAllCountries(false)
+        }
     }
 
     const handleAssign = (team) => {
-        team.addCountry(props.country)
-        const data = postData(team, props.country)
-        if (data) {
-            updateTeam(team)
-            updateCountry(props.country)
-            setIsOptionShown(false)
-        } else {
-            console.log("Error assigning country to team");
-        }
+        const valid = team.addCountry(props.country)
+        console.log("validity: ", valid);
 
+        if (valid) {
+            const data = postData(team, props.country)
+            if (data) {
+                updateTeam(team)
+                updateCountry(props.country)
+            } else {
+                console.log("Error assigning country to team");
+            }
+            setIsOptionShown(false)
+            setCurrentCountryOption(null);
+            setShowAllCountries(true)
+            toast.success("Country assigned successfully!");
+        } else {
+            toast.error("Assignment Faild!");
+        }
     }
 
-    const handleUnassign = () => {
-        teams.forEach(team => {
-            team.removeCountry(props.country);
-            updateTeam(team);
-        });
+    const handleUnassign = async () => {
+        // Find the team by name, matching the country's assignedTeam
+        const assignedTeam = teams.find(team =>
+            team.name === props.country.assignedTeam
+        );
+        console.log("assignedTeam:", assignedTeam);
 
-        updateCountry({
-            ...props.country,
-            assignedTeam: null,
-            color: null,
-        });
+        if (assignedTeam) {
+            const updatedCountries = assignedTeam.countries.filter(c => c.id !== props.country.id);
+            const updatedTeam = { ...assignedTeam, countries: updatedCountries };
+
+            const updatedCountry = {
+                ...props.country,
+                assignedTeam: "",
+                color: null,
+            };
+
+            const data = await postData(updatedTeam, updatedCountry);
+            if (data) {
+                updateTeam(updatedTeam);
+                updateCountry(updatedCountry);
+                await getData();
+            } else {
+                console.log("Error unassigning country from team");
+            }
+        } else {
+            console.log("No assigned team found for this country.");
+        }
 
         setIsOptionShown(false);
+        setCurrentCountryOption(null);
+        setShowAllCountries(true);
     };
 
 
@@ -98,7 +124,6 @@ function Label(props) {
         <div style={styles.container}>
             {isOptionsShown &&
                 <div className="bg-light p-1 d-flex flex-column align-items-center rounded rounded-3 border-bottom border-3" style={styles.options(position.left, position.top)}>
-                    <h2 onClick={handleUnassign} style={styles.labelName}>Un-Assign</h2>
                     {teams.map((team) => {
                         return <h2 key={team.id} onClick={() => handleAssign(team)} className={`${colorMapper.bg[team.color]} ${colorMapper.border[team.color]}`} style={styles.labelName}>{team.name}</h2>
                     })}

@@ -8,6 +8,8 @@ function Map() {
     const { countries } = useCountryContext();
     const [labelBox, setLabelBox] = useState(true)
     const [labelPrice, setLabelPrice] = useState(false)
+    const [currentCountryOption, setCurrentCountryOption] = useState(null);
+    const [showallCountries, setShowAllCountries] = useState(true);
 
     const handelToggleLabelBox = () => {
         labelBox ? setLabelBox(false) : setLabelBox(true)
@@ -42,9 +44,11 @@ function Map() {
                                     country.color
                                 )}
                             />
-                            <div style={styles.labelContainer}>
-                                <Label labelBox={labelBox} labelPrice={labelPrice} country={country} />
-                            </div>
+                            {(showallCountries || currentCountryOption == country.id) &&
+                                <div style={styles.labelContainer}>
+                                    <Label labelBox={labelBox} labelPrice={labelPrice} country={country} setCurrentCountryOption={setCurrentCountryOption} setShowAllCountries={setShowAllCountries} />
+                                </div>
+                            }
                         </div>
                     );
                 })}

@@ -7,6 +7,6 @@ export class Country {
         this.labelPosition = labelPosition;
         this.color = (color == null || color == '') ? "#3d3d3d" : color;
         this.price = price ? price : { "gold": 2, "silver": 20, "bronze": 300 }
-        this.assignedTeam = (assignedTeam == null || assignedTeam == '') ? assignedTeam : "";
+        this.assignedTeam = (assignedTeam == null || assignedTeam == '') ? "" : assignedTeam;
     }
 }

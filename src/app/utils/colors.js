@@ -17,5 +17,13 @@ export const colorMapper = {
         green: "#0F9D58",
         yellow: "#F4B400",
         white: "#FFFFFF"
+    },
+    coin: {
+        innerGold: "#ffc107",
+        innerSilver: "#949494",
+        innerBronze: "#8d3f00",
+        outterGold: "#dfa805",
+        outterSilver: "#757575",
+        outterBronze: "#5e2b01",
     }
 };
